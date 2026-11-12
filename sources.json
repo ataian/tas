@@ -1,0 +1,67 @@
+{
+  "package_version": "1.0.0",
+  "tas": {
+    "repository": "https://github.com/ataian/generic-devteam",
+    "base_revision": "68395c91120286e907532dd28bb25a16c9bdec52",
+    "source_state": "working-tree snapshot over base_revision",
+    "source_path": "references/tas-authoring-standard.md",
+    "source_sha256": "17d4ff93cd70abeba5d50f5974ebb3c97c52685c838aa602964443dbce14a166",
+    "packaged_sha256": "13f197b6ac68ec0a03893428a7f7d6b7f72ae1768cf6157f6cae1364b7369a1f",
+    "adaptations": [
+      "Resolve both style-source links to bundled reference files.",
+      "Replace Maker-specific generated-role loading assertion with explicit consumer loading."
+    ]
+  },
+  "caveman_release": "v4.1.0",
+  "upstream_files": [
+    {
+      "repository": "https://github.com/JuliusBrussee/caveman",
+      "revision": "1e91f1306d602d4ca23618701b1185575ae1869b",
+      "source_path": "skills/caveman/SKILL.md",
+      "local_path": "references/caveman.md",
+      "sha256": "415d43518f2b1a9498c15a445d4657117b129ee5e81b19454ce348439cc6672b"
+    },
+    {
+      "repository": "https://github.com/JuliusBrussee/caveman",
+      "revision": "1e91f1306d602d4ca23618701b1185575ae1869b",
+      "source_path": "skills/caveman-review/SKILL.md",
+      "local_path": "references/caveman-review.md",
+      "sha256": "599330563f19b5c59c3efddffcd7e8d9098b74c29817ab422ccd3253b103fcb8"
+    },
+    {
+      "repository": "https://github.com/JuliusBrussee/caveman",
+      "revision": "1e91f1306d602d4ca23618701b1185575ae1869b",
+      "source_path": "LICENSE",
+      "local_path": "third_party/caveman/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "repository": "https://github.com/JuliusBrussee/caveman",
+      "revision": "1e91f1306d602d4ca23618701b1185575ae1869b",
+      "source_path": "LICENSE-MIT",
+      "local_path": "third_party/caveman/LICENSE-MIT",
+      "sha256": "5eb826cd03151bcc7cce3f80d40e87733237fedfc6c36d6908aca5fd650a0bdb"
+    },
+    {
+      "repository": "https://github.com/JuliusBrussee/caveman",
+      "revision": "1e91f1306d602d4ca23618701b1185575ae1869b",
+      "source_path": "NOTICE",
+      "local_path": "third_party/caveman/NOTICE",
+      "sha256": "20112dc6e62e91da4f03c29fd10cfa41743a9c526389fdf1396c3649c18216fc"
+    },
+    {
+      "repository": "https://github.com/JuliusBrussee/caveman",
+      "revision": "1e91f1306d602d4ca23618701b1185575ae1869b",
+      "source_path": "LICENSING.md",
+      "local_path": "third_party/caveman/LICENSING.md",
+      "sha256": "e36ef7b22766ea22f01bce187f629669e62f2346948435154a295f91bd3c3ff2"
+    },
+    {
+      "repository": "https://github.com/ataian/generic-devteam",
+      "revision": "68395c91120286e907532dd28bb25a16c9bdec52",
+      "source_path": "LICENSE",
+      "local_path": "third_party/generic-devteam/LICENSE",
+      "sha256": "dd908f5dab4d4a99a40ce774c5bb6fa0c3997175aa00ebf51f40561dd778d969"
+    }
+  ]
+}
