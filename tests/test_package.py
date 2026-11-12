@@ -62,6 +62,14 @@ def validate_package(root):
                 anchors = {re.sub(r"[^\w -]", "", h.lower()).replace(" ", "-") for h in headings}
                 assert unquote(link.fragment) in anchors, f"missing anchor: {destination}"
 
+    for relative in ("references/caveman.md", "references/caveman-review.md"):
+        text = (root / relative).read_text(encoding="utf-8")
+        assert not text.startswith("---\n"), f"style reference has skill metadata: {relative}"
+        assert not re.search(
+            r"ultracave|megacave|/caveman\b|^## Persistence$|stop caveman|normal mode",
+            text, re.IGNORECASE | re.MULTILINE,
+        ), f"unsupported style routing: {relative}"
+
     sources = json.loads((root / "sources.json").read_text(encoding="utf-8"))
     assert sources["package_version"] == "1.0.0", "source version"
     originals = sources["upstream_files"]
@@ -97,6 +105,20 @@ class PackageTests(unittest.TestCase):
 
     def test_relocated_package_needs_no_maker_or_network(self):
         self.assertTrue(validate_package(self.copy_package()))
+
+    def test_style_references_have_no_skill_metadata_or_mode_routing(self):
+        for relative in ("references/caveman.md", "references/caveman-review.md"):
+            with self.subTest(reference=relative):
+                text = (ROOT / relative).read_text(encoding="utf-8")
+                self.assertFalse(text.startswith("---\n"), "style reference has skill metadata")
+                self.assertNotRegex(text, r"(?im)ultracave|megacave|/caveman\b|^## Persistence$|stop caveman|normal mode")
+
+    def test_skill_command_in_style_reference_is_rejected(self):
+        root = self.copy_package()
+        path = root / "references/caveman-review.md"
+        path.write_text(path.read_text(encoding="utf-8") + "\nUse /caveman-review.\n", encoding="utf-8")
+        with self.assertRaisesRegex(AssertionError, "unsupported style routing"):
+            validate_package(root)
 
     def test_missing_reference_is_rejected(self):
         root = self.copy_package()

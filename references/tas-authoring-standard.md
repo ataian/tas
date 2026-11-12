@@ -10,9 +10,9 @@ Write concise instructions that preserve authority, meaning, and verifiable outc
 
 ## Style source
 
-Read original `caveman` from [the bundled reference](caveman.md) unless already available; authoring does not authorize installation.
+Read the TAS-adapted `caveman` from [the bundled reference](caveman.md) unless already available; authoring does not authorize installation.
 Apply its style to persisted prose too, overriding its persisted-content exception.
-Use original [`caveman-review`](caveman-review.md) with Auto-Clarity for findings; retain the assigned review procedure and native outcomes.
+Use the TAS-adapted [`caveman-review`](caveman-review.md) with Auto-Clarity for findings; retain the assigned review procedure and native outcomes.
 Preserve technical payload verbatim and retain safety warnings, conditions, and exceptions. Clarity wins over length limits.
 Other roles receive these scope rules only through explicitly loaded instructions; this reference is not automatically loaded for them.
 

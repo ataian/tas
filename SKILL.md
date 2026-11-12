@@ -31,8 +31,8 @@ If a required file is missing or unreadable, report its path and stop the affect
 ## Procedure
 
 1. Read [the TAS standard](references/tas-authoring-standard.md) completely on every invocation.
-2. Read [original Caveman](references/caveman.md) unless that bundled version is already available in context.
-3. For review findings, also read [original Caveman Review](references/caveman-review.md), including Auto-Clarity.
+2. Read [the TAS Caveman reference](references/caveman.md) unless that bundled version is already available in context.
+3. For review findings, also read [the TAS Caveman Review reference](references/caveman-review.md), including Auto-Clarity.
 4. Read the target's applicable instructions and current text. Identify the requested result, authorized scope, and existing approval gates.
 5. Apply the TAS standard to the commissioned text. Preserve exact technical payload, conditions, exceptions, and required evidence.
 6. Compare revised wording with its source. Verify the applicable acceptance checks in the TAS standard before claiming completion.
@@ -43,7 +43,6 @@ If a required file is missing or unreadable, report its path and stop the affect
 Use the bundled Caveman files as style references for the commissioned work.
 TAS extends their style to persisted prose, preserving clarity and safety exceptions.
 Retain the assigned review procedure, evidence checks, and native review outcomes; style guidance does not replace them.
-Upstream mode commands and session persistence are not TAS runtime features.
 
 This authoring standard grants no installation, file-edit, commit, publication, deployment, or infrastructure permission.
 Other agents receive TAS only through instructions they actually load; package availability alone does not activate it for them.

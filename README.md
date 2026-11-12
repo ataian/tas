@@ -23,13 +23,13 @@ The skill uses file-reading capabilities, not a particular agent API. It needs n
 
 - [SKILL.md](SKILL.md): triggers, loading procedure, scope, and verification.
 - [TAS standard](references/tas-authoring-standard.md): instruction, compression, placement, and output contracts.
-- [Caveman](references/caveman.md): original writing-style reference.
-- [Caveman Review](references/caveman-review.md): original findings format with Auto-Clarity.
+- [Caveman](references/caveman.md): TAS-adapted writing-style reference.
+- [Caveman Review](references/caveman-review.md): TAS-adapted findings format with Auto-Clarity.
 - [Source inventory](sources.json): pinned origins and checksums.
 - [Attribution and adaptations](NOTICE.md): license boundaries and changes from the source standard.
 
-The Caveman instruction files are bundled unchanged as references, not installed as separate skills.
-Their optional mode commands are not features of TAS. The assigned review process remains responsible for tests and verdicts.
+The Caveman instruction files are bundled as style references, with skill metadata and runtime mode handling removed.
+The assigned review process remains responsible for tests and verdicts.
 TAS applies the writing style to persisted text too; clarity, safety warnings, conditions, and exceptions take priority over length.
 TAS is not a claim of full ASD-STE100 compliance.
 

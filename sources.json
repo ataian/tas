@@ -6,9 +6,10 @@
     "source_state": "working-tree snapshot over base_revision",
     "source_path": "references/tas-authoring-standard.md",
     "source_sha256": "17d4ff93cd70abeba5d50f5974ebb3c97c52685c838aa602964443dbce14a166",
-    "packaged_sha256": "13f197b6ac68ec0a03893428a7f7d6b7f72ae1768cf6157f6cae1364b7369a1f",
+    "packaged_sha256": "b99eb1fdf217f3f43bdc13bbc59c10a1777cfe95d536bbd2137ad20cdabf7f91",
     "adaptations": [
       "Resolve both style-source links to bundled reference files.",
+      "Label bundled style references as TAS adaptations.",
       "Replace Maker-specific generated-role loading assertion with explicit consumer loading."
     ]
   },
@@ -19,14 +20,25 @@
       "revision": "1e91f1306d602d4ca23618701b1185575ae1869b",
       "source_path": "skills/caveman/SKILL.md",
       "local_path": "references/caveman.md",
-      "sha256": "415d43518f2b1a9498c15a445d4657117b129ee5e81b19454ce348439cc6672b"
+      "source_sha256": "415d43518f2b1a9498c15a445d4657117b129ee5e81b19454ce348439cc6672b",
+      "sha256": "2ad778c6e73a8a15a14ad7d96cdaf4566eb3674d9eb03204bfb178c14951445c",
+      "adaptations": [
+        "Remove skill metadata, session persistence, alternate-mode routing, and hook/status commands.",
+        "Remove runtime activation/deactivation and compression-command references; retain writing rules and safety exceptions.",
+        "Add a visible adaptation notice."
+      ]
     },
     {
       "repository": "https://github.com/JuliusBrussee/caveman",
       "revision": "1e91f1306d602d4ca23618701b1185575ae1869b",
       "source_path": "skills/caveman-review/SKILL.md",
       "local_path": "references/caveman-review.md",
-      "sha256": "599330563f19b5c59c3efddffcd7e8d9098b74c29817ab422ccd3253b103fcb8"
+      "source_sha256": "599330563f19b5c59c3efddffcd7e8d9098b74c29817ab422ccd3253b103fcb8",
+      "sha256": "ce21677c55da6424cdbef15e4484e8960ed9414a02689d0b82d5bc48e815ed98",
+      "adaptations": [
+        "Remove skill metadata and runtime activation/deactivation commands.",
+        "Add a reference heading and visible adaptation notice; retain findings format and Auto-Clarity."
+      ]
     },
     {
       "repository": "https://github.com/JuliusBrussee/caveman",
