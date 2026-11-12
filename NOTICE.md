@@ -4,12 +4,24 @@
 
 TAS means Technical Agent Specification. The standard derives from the `generic-devteam` project's `references/tas-authoring-standard.md`, by Max and the generic-devteam contributors.
 The original MIT notice is retained in [third_party/generic-devteam/LICENSE](third_party/generic-devteam/LICENSE).
-[Sources and checksums](sources.json) identify source revisions, the TAS working-tree snapshot, and bundled files.
+[Sources and checksums](sources.json) identify the historical source snapshot, the later accepted Maker baseline, method sources, and bundled files.
 
-The standalone adaptation changes only the standard's style-source links, its adapted-reference labels, and its Maker-specific generated-role loading statement.
-Both style links now resolve to bundled TAS adaptations. Other roles must load their TAS instructions explicitly.
-All other source-standard wording remains unchanged.
+The initial standalone adaptation localized the style-source links and made consumer loading explicit.
+The maintained standard now integrates writing-for-agents and preserves the accepted Maker ticket policy, including the ticket-only scope of its short-bullet rule.
+Both style links resolve to bundled TAS adaptations. Other roles must load their TAS instructions explicitly.
 The new entrypoint, README, checks, and provenance inventory package this standard independently of the Maker.
+
+## Writing-for-agents
+
+The standard and [Skill mechanics](references/skill-mechanics.md) adapt Matt Pocock's `writing-for-agents/SKILL.md` and required `SKILL-MECHANICS.md` at the exact revision in `sources.json`.
+The complete originals and `agents/openai.yaml` were inspected; their source paths and hashes remain recorded for comparison.
+These are TAS adaptations, not bundled original skill trees or an installation of writing-for-agents.
+The original [MIT license](third_party/mattpocock/LICENSE), Copyright (c) 2026 Matt Pocock, is retained unchanged.
+
+The adaptation integrates context pointers, the two loads, information hierarchy, completion clarity/demand, leading words, positive prompting, and pruning with TAS authority and evidence contracts.
+Skill invocation, explicit-only metadata, and router mechanics are conditional on verified harness behaviour.
+The original's `disable-model-invocation: true` semantics are not asserted as a portable capability.
+Behavioural explanations guide authoring; no model benchmark, compliance improvement, or token saving is claimed by these package checks.
 
 ## Caveman
 

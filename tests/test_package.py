@@ -15,10 +15,48 @@ PUBLIC_FILES = {
     ".gitignore", "LICENSE", "NOTICE.md", "README.md", "SKILL.md", "sources.json",
     "references/tas-authoring-standard.md", "references/caveman.md",
     "references/caveman-review.md", "third_party/caveman/LICENSE",
+    "references/skill-mechanics.md", "third_party/mattpocock/LICENSE",
     "third_party/caveman/LICENSE-MIT", "third_party/caveman/NOTICE",
     "third_party/caveman/LICENSING.md", "third_party/generic-devteam/LICENSE",
     "tests/test_package.py",
 }
+
+
+METHOD_CONTRACTS = {
+    "Context pointers": ("state what the target contains", "one trigger per distinct branch",
+                         "Sharpen a weak pointer before inlining"),
+    "The two loads": ("Context load", "Cognitive load", "human judgement"),
+    "Information hierarchy": ("In-file steps", "In-file reference", "Disclosed reference",
+                              "Inline what every branch needs", "Co-locate", "Sprawl"),
+    "Steps and completion": ("checkable and exhaustive", "Sharpen the criterion first",
+                             "observe premature completion", "real context boundary"),
+    "Leading words and positive prompting": ("established semantic anchors", "execution",
+                                            "invocation", "positive target", "hard guardrails"),
+    "Pruning": ("single source of truth", "environment", "reasons, conventions, and gotchas",
+                "sediment", "model-relative", "actual runs"),
+}
+
+
+def validate_method(root):
+    """Static instruction contracts; mutation coverage is not model-behavior evidence."""
+    standard = (root / "references/tas-authoring-standard.md").read_text(encoding="utf-8")
+    for heading, clauses in METHOD_CONTRACTS.items():
+        section = re.search(r"^## " + re.escape(heading) + r"\n(.*?)(?=^## |\Z)",
+                            standard, re.MULTILINE | re.DOTALL)
+        assert section, f"missing method section: {heading}"
+        for clause in clauses:
+            assert clause in section[1], f"missing method instruction: {heading}: {clause}"
+    assert "For ticket bodies, use short statements" in standard, "ticket-only output scope"
+    assert "Include concise story criteria and necessary technical context" in standard, "accepted ticket policy"
+    assert "English for development communication and artifacts" in standard, "development language"
+    mechanics = (root / "references/skill-mechanics.md").read_text(encoding="utf-8")
+    for clause in ("model-invoked", "user-invoked", "disable-model-invocation: true",
+                   "verified", "catalog", "does not establish", "plain reference",
+                   "Splitting by invocation", "Router"):
+        assert clause in mechanics, f"missing invocation contract: {clause}"
+    skill = (root / "SKILL.md").read_text(encoding="utf-8")
+    assert "When the commissioned text is a skill" in skill, "missing skill branch trigger"
+    assert "references/skill-mechanics.md" in skill, "missing skill mechanics pointer"
 
 
 def validate_package(root):
@@ -33,7 +71,7 @@ def validate_package(root):
     skill = (root / "SKILL.md").read_text(encoding="utf-8")
     assert skill.startswith("---\n"), "frontmatter opening"
     header, body = skill[4:].split("\n---\n", 1)
-    for field in ("name: tas", "version: 1.0.0", "license: MIT"):
+    for field in ("name: tas", "version: 1.1.0", "license: MIT"):
         assert field in header.splitlines(), f"frontmatter field: {field}"
     description = re.search(r"^description: (.+)$", header, re.MULTILINE)
     assert description and len(description[1]) <= 60, "description length"
@@ -71,18 +109,32 @@ def validate_package(root):
         ), f"unsupported style routing: {relative}"
 
     sources = json.loads((root / "sources.json").read_text(encoding="utf-8"))
-    assert sources["package_version"] == "1.0.0", "source version"
+    assert sources["package_version"] == "1.1.0", "source version"
     originals = sources["upstream_files"]
     assert {entry["local_path"] for entry in originals} == {
         "references/caveman.md", "references/caveman-review.md",
         "third_party/caveman/LICENSE", "third_party/caveman/LICENSE-MIT",
         "third_party/caveman/NOTICE", "third_party/caveman/LICENSING.md",
         "third_party/generic-devteam/LICENSE",
+        "third_party/mattpocock/LICENSE",
     }, "upstream file coverage"
     for entry in originals:
         assert entry["local_path"] in PUBLIC_FILES, "undeclared source destination"
         actual = hashlib.sha256((root / entry["local_path"]).read_bytes()).hexdigest()
         assert actual == entry["sha256"], f"source bytes changed: {entry['local_path']}"
+    validate_method(root)
+    method_source = sources["writing_for_agents"]
+    assert method_source["repository"] == "https://github.com/mattpocock/skills", "method repository"
+    assert re.fullmatch(r"[0-9a-f]{40}", method_source["revision"]), "method revision"
+    assert {entry["source_path"] for entry in method_source["source_files"]} == {
+        "skills/productivity/writing-for-agents/SKILL.md",
+        "skills/productivity/writing-for-agents/SKILL-MECHANICS.md",
+        "skills/productivity/writing-for-agents/agents/openai.yaml",
+    }, "complete original method inventory"
+    for entry in method_source["source_files"]:
+        assert re.fullmatch(r"[0-9a-f]{64}", entry["sha256"]), "method original hash"
+    for relative, expected in method_source["adapted_files"].items():
+        assert hashlib.sha256((root / relative).read_bytes()).hexdigest() == expected, "adapted method bytes"
     standard = (root / "references/tas-authoring-standard.md").read_bytes()
     assert hashlib.sha256(standard).hexdigest() == sources["tas"]["packaged_sha256"], "TAS bytes changed"
     assert "integrations.md" not in standard.decode(), "external Maker reference"
@@ -90,6 +142,27 @@ def validate_package(root):
 
 
 class PackageTests(unittest.TestCase):
+    def test_writing_method_preserves_portable_contracts(self):
+        validate_method(ROOT)
+
+    def test_empty_method_body_is_rejected_with_heading_retained(self):
+        for heading in METHOD_CONTRACTS:
+            with self.subTest(section=heading):
+                root = self.copy_package()
+                path = root / "references/tas-authoring-standard.md"
+                path.write_text(re.sub(
+                    r"(^## " + re.escape(heading) + r"\n).*?(?=^## |\Z)",
+                    r"\1\n", path.read_text(), flags=re.MULTILINE | re.DOTALL), encoding="utf-8")
+                with self.assertRaisesRegex(AssertionError, "missing method instruction"):
+                    validate_method(root)
+
+    def test_removed_skill_branch_is_rejected(self):
+        root = self.copy_package()
+        path = root / "SKILL.md"
+        path.write_text(path.read_text().replace("When the commissioned text is a skill", "For any text"))
+        with self.assertRaisesRegex(AssertionError, "missing skill branch trigger"):
+            validate_method(root)
+
     def copy_package(self):
         temporary = tempfile.TemporaryDirectory(prefix="tas-package-")
         self.addCleanup(temporary.cleanup)

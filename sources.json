@@ -1,20 +1,59 @@
 {
-  "package_version": "1.0.0",
+  "package_version": "1.1.0",
   "tas": {
     "repository": "https://github.com/ataian/generic-devteam",
     "base_revision": "68395c91120286e907532dd28bb25a16c9bdec52",
     "source_state": "working-tree snapshot over base_revision",
     "source_path": "references/tas-authoring-standard.md",
     "source_sha256": "17d4ff93cd70abeba5d50f5974ebb3c97c52685c838aa602964443dbce14a166",
-    "packaged_sha256": "b99eb1fdf217f3f43bdc13bbc59c10a1777cfe95d536bbd2137ad20cdabf7f91",
+    "packaged_sha256": "d357909835ca7ca5f1072b9f42e9e2bf2633ea8225b8a68607df6325a488ba53",
+    "accepted_policy_revision": "2a71dedc1c697f3aacde5fcfd4c51a14a3089df3",
+    "accepted_policy_sha256": "4f199892863e2ffa2cc4105d217805e86d433ce80a7e0f9c6dcbb8efdc78e47c",
     "adaptations": [
       "Resolve both style-source links to bundled reference files.",
       "Label bundled style references as TAS adaptations.",
-      "Replace Maker-specific generated-role loading assertion with explicit consumer loading."
+      "Replace Maker-specific generated-role loading assertion with explicit consumer loading.",
+      "Preserve the accepted Maker ticket policy, including the ticket-only short-bullet scope.",
+      "Integrate writing-for-agents with TAS authority, evidence, and style contracts."
+    ]
+  },
+  "writing_for_agents": {
+    "repository": "https://github.com/mattpocock/skills",
+    "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+    "source_files": [
+      {
+        "source_path": "skills/productivity/writing-for-agents/SKILL.md",
+        "sha256": "551adca942227b44192edba88acd4e8db911f0121ce58ad16944ccf6a896a74a"
+      },
+      {
+        "source_path": "skills/productivity/writing-for-agents/SKILL-MECHANICS.md",
+        "sha256": "c768e6307c7c10728c401c213f2c4ba71c542127eeb7ad2956aabd15a0fa0059"
+      },
+      {
+        "source_path": "skills/productivity/writing-for-agents/agents/openai.yaml",
+        "sha256": "eacb24b2a618cfb81dacb0416f4fdd75ddf3a8060f8ddb99aae1b1e301907e4b"
+      }
+    ],
+    "adapted_files": {
+      "references/tas-authoring-standard.md": "d357909835ca7ca5f1072b9f42e9e2bf2633ea8225b8a68607df6325a488ba53",
+      "references/skill-mechanics.md": "262ba9fac2b2dd57ad0343b4cd18dedc93b192cea669225b2e209c260fc66949"
+    },
+    "adaptations": [
+      "Integrate the full writing method into the TAS standard; retain authority/safety and evidence contracts.",
+      "Disclose the skill-only mechanics branch through the TAS entrypoint.",
+      "Describe invocation intent portably; require verified harness support for metadata, visibility, invocation permissions, and context-load claims.",
+      "Keep originals as pinned provenance, not bundled or installed skill packages."
     ]
   },
   "caveman_release": "v4.1.0",
   "upstream_files": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "source_path": "LICENSE",
+      "local_path": "third_party/mattpocock/LICENSE",
+      "sha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+    },
     {
       "repository": "https://github.com/JuliusBrussee/caveman",
       "revision": "1e91f1306d602d4ca23618701b1185575ae1869b",
